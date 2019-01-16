@@ -23,6 +23,11 @@ namespace Speller.Presentation.Web.Api.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] SpellingRequest request, [FromServices] ISpellingService spellingService)
         {
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
+
             spellingService.AddDictionary(request.Dictionary);
 
             var result = spellingService.SuggestCorrection(request.Words.ToList());
