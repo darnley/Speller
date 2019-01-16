@@ -12,7 +12,7 @@ namespace Speller.Presentation.Console
             Execute();   
         }
 
-        static async void Execute()
+        static void Execute()
         {
             // Instantiate the spelling service
             SpellingService spellingService = new SpellingService();
