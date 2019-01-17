@@ -51,6 +51,10 @@ Content-Type: application/json
 }
 ```
 
+In `dictionary` array, you are supposed to send the destination words, that is, the words the algorithm will "search".
+
+In `words` array, you are supposed to send the origin words, that is, the words the algorithm will check and validate.
+
 #### Docker support
 
 This project is ready for be executed in (Linux) Docker containers. The provided `Dockerfile` will create the machine and exposes it by port `80`.
