@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Speller.SpellingBox.Models;
 using Speller.SpellingBox.Services;
 
 namespace Speller.Presentation.Web.Api
@@ -27,6 +28,9 @@ namespace Speller.Presentation.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services
+                .Configure<MachineLearningEndpoint>(Configuration.GetSection("MachineLearningEndpointSettings"));
 
             services
                 .AddScoped<ISpellingService, SpellingService>()

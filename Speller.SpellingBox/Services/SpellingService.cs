@@ -54,6 +54,14 @@ namespace Speller.SpellingBox.Services
         /// <summary>
         /// Implement the dependency injection.
         /// </summary>
+        public SpellingService()
+        {
+            this._symSpellInstance = new SymSpell(this.initialCapacity, this.maximumEditDistance, this.prefixLength);
+        }
+
+        /// <summary>
+        /// Implement the dependency injection.
+        /// </summary>
         public SpellingService(IMachineLearningService machineLearningService)
         {
             this._machineLearningService = machineLearningService;
@@ -104,7 +112,7 @@ namespace Speller.SpellingBox.Services
 
                     if (valueToAdd == words[currentWordIndex])
                     {
-                        this._machineLearningService.AddIndex(currentWordIndex);
+                        this._machineLearningService.AddWord(new Models.MachineLearningWord() { Word = words[currentWordIndex], Index = currentWordIndex });
                     } else
                     {
                         words[currentWordIndex] = valueToAdd;
