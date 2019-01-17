@@ -76,6 +76,7 @@ namespace Speller.SpellingBox.Services
         {
             Parallel.ForEach(dictionary, (currentWord) =>
             {
+                // Add each word to be recognized as dictionary
                 _symSpellInstance.CreateDictionaryEntry(currentWord, 1);
             });
         }
@@ -87,13 +88,16 @@ namespace Speller.SpellingBox.Services
         /// <returns>The top rated word by the algorithm.</returns>
         public string SuggestCorrection(string word)
         {
+            // It removes all special characters using RegEx replacing
             var suggestion = _symSpellInstance.Lookup(RemoveSpecialCharacters(word), SymSpell.Verbosity.Top).FirstOrDefault();
 
             if (suggestion == null)
             {
-                return word;
+                // There is NO suggestion for this word
+                return null;
             }
 
+            // There is a suggestion for this word
             return suggestion.term;
         }
 
@@ -110,9 +114,14 @@ namespace Speller.SpellingBox.Services
                 {
                     string valueToAdd = this.SuggestCorrection(words[currentWordIndex]);
 
-                    if (valueToAdd == words[currentWordIndex])
+                    if (valueToAdd == null)
                     {
-                        this._machineLearningService.AddWord(new Models.MachineLearningWord() { Word = words[currentWordIndex], Index = currentWordIndex });
+                        // Add the word to the ML list to be sent later
+                        this._machineLearningService.AddWord(
+                            new Models.MachineLearningWord() {
+                                Word = words[currentWordIndex],
+                                Index = currentWordIndex
+                            });
                     } else
                     {
                         words[currentWordIndex] = valueToAdd;
