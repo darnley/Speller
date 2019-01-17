@@ -14,10 +14,13 @@ namespace Speller.Presentation.Web.Api.Controllers
     public class SpellerController : ControllerBase
     {
         public readonly ILogger<SpellerController> _logger;
+        public readonly IMachineLearningService _machineLearningService;
 
-        public SpellerController(ILogger<SpellerController> logger)
+        public SpellerController(ILogger<SpellerController> logger,
+            IMachineLearningService machineLearningService)
         {
             this._logger = logger;
+            this._machineLearningService = machineLearningService;
         }
 
         // GET api/speller
@@ -43,6 +46,11 @@ namespace Speller.Presentation.Web.Api.Controllers
             var result = spellingService.SuggestCorrection(request.Words.ToList());
 
             result.Wait();
+
+            if (this._machineLearningService.HasIndexes())
+            {
+                this._machineLearningService.CorrectWordsByIndexAsync(result.Result).Wait();
+            }
 
             return new OkObjectResult(result.Result);
         }

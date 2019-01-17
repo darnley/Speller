@@ -29,7 +29,8 @@ namespace Speller.Presentation.Web.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services
-                .AddScoped<ISpellingService, SpellingService>(service => new SpellingService())
+                .AddScoped<ISpellingService, SpellingService>()
+                .AddScoped<IMachineLearningService, MachineLearningService>()
                 .AddLogging();
         }
 

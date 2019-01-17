@@ -24,6 +24,8 @@ namespace Speller.SpellingBox.Services
     /// </summary>
     public class SpellingService : ISpellingService
     {
+        public IMachineLearningService _machineLearningService;
+
         /// <summary>
         /// The symmetric delete spelling algorithm object.
         /// </summary>
@@ -52,8 +54,9 @@ namespace Speller.SpellingBox.Services
         /// <summary>
         /// Implement the dependency injection.
         /// </summary>
-        public SpellingService()
+        public SpellingService(IMachineLearningService machineLearningService)
         {
+            this._machineLearningService = machineLearningService;
             this._symSpellInstance = new SymSpell(this.initialCapacity, this.maximumEditDistance, this.prefixLength);
         }
 
@@ -99,7 +102,13 @@ namespace Speller.SpellingBox.Services
                 {
                     string valueToAdd = this.SuggestCorrection(words[currentWordIndex]);
 
-                    words[currentWordIndex] = valueToAdd;
+                    if (valueToAdd == words[currentWordIndex])
+                    {
+                        this._machineLearningService.AddIndex(currentWordIndex);
+                    } else
+                    {
+                        words[currentWordIndex] = valueToAdd;
+                    }
                 });
 
                 return words;
