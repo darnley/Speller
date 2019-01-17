@@ -38,7 +38,6 @@ Using REST, the request will be something like below.
 POST /api/speller HTTP/1.1
 Host: localhost:32768
 Content-Type: application/json
-cache-control: no-cache
 {
     "dictionary": [
         "love",
@@ -58,4 +57,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://darnley.mit-license.org/)
