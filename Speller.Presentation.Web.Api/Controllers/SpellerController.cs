@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Speller.SpellingBox.Services;
 using Speller.Presentation.Web.Api.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Speller.Presentation.Web.Api.Controllers
 {
@@ -12,6 +13,13 @@ namespace Speller.Presentation.Web.Api.Controllers
     [ApiController]
     public class SpellerController : ControllerBase
     {
+        public readonly ILogger<SpellerController> _logger;
+
+        public SpellerController(ILogger<SpellerController> logger)
+        {
+            this._logger = logger;
+        }
+
         // GET api/speller
         [HttpGet]
         public ActionResult<string> Get()
@@ -27,6 +35,8 @@ namespace Speller.Presentation.Web.Api.Controllers
             {
                 return new BadRequestObjectResult(ModelState);
             }
+
+            this._logger.LogInformation($"Received request with {request.Dictionary.Count()} words in dictionary and {request.Words.LongCount()} words to be verified");
 
             spellingService.AddDictionary(request.Dictionary);
 
