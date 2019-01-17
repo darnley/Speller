@@ -44,30 +44,42 @@ namespace Speller.Presentation.Web.Api.Controllers
                 return new BadRequestObjectResult(ModelState);
             }
 
-            this._logger.LogInformation($"Received request with {request.Dictionary.Count()} words in dictionary and {request.Words.LongCount()} words to be verified");
-
+            // Add the words from request to the dictionary
             spellingService.AddDictionary(request.Dictionary);
 
+            // Get the corrections from algorithm
             var result = spellingService.SuggestCorrection(request.Words.ToList());
-
-            result.Wait();
 
             if (machineLearning != null & this._machineLearningService.HasIndexes())
             {
+                #region Machine Learning Service configuration
                 var machineLearningConfigurationSection = _configuration.GetSection("MachineLearningEndpointSettings");
 
-                this._machineLearningService.AddEndpoint(
-                    new Uri(machineLearningConfigurationSection.GetSection(machineLearning).GetValue<string>("Url")),
-                    machineLearningConfigurationSection.GetSection(machineLearning).GetValue<string>("apiKey"));
+                try
+                {
+                    this._machineLearningService.AddEndpoint(
+                        new Uri(machineLearningConfigurationSection.GetSection(machineLearning).GetValue<string>("Url")),
+                        machineLearningConfigurationSection.GetSection(machineLearning).GetValue<string>("apiKey"));
+                }
+                catch (ArgumentNullException)
+                {
+                    _logger.LogError($"Machine Learning configuration with name '{machineLearning}' not found");
+                }
+                #endregion
+
+                result.Wait();
 
                 try
                 {
                     this._machineLearningService.CorrectWordsByIndexAsync(result.Result).Wait();
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     _logger.LogError(ex.Message);
                 }
             }
+
+            result.Wait();
 
             return new OkObjectResult(result.Result);
         }
