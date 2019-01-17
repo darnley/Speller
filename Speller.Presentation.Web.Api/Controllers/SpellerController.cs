@@ -50,7 +50,7 @@ namespace Speller.Presentation.Web.Api.Controllers
             // Get the corrections from algorithm
             var result = spellingService.SuggestCorrection(request.Words.ToList());
 
-            if (machineLearning != null & this._machineLearningService.HasIndexes())
+            if (machineLearning != null)
             {
                 #region Machine Learning Service configuration
                 var machineLearningConfigurationSection = _configuration.GetSection("MachineLearningEndpointSettings");
@@ -71,7 +71,8 @@ namespace Speller.Presentation.Web.Api.Controllers
 
                 try
                 {
-                    this._machineLearningService.CorrectWordsByIndexAsync(result.Result).Wait();
+                    if (this._machineLearningService.HasIndexes())
+                        this._machineLearningService.CorrectWordsByIndexAsync(result.Result).Wait();
                 }
                 catch (Exception ex)
                 {
