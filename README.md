@@ -55,6 +55,17 @@ In `dictionary` array, you are supposed to send the destination words, that is, 
 
 In `words` array, you are supposed to send the origin words, that is, the words the algorithm will check and validate.
 
+The response for that request will be...
+
+
+```
+[
+    "love",
+    "card"
+]
+```
+
+
 #### Docker support
 
 This project is ready for be executed in (Linux) Docker containers. The provided `Dockerfile` will create the machine and exposes it by port `80`.
