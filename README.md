@@ -51,6 +51,10 @@ Content-Type: application/json
 }
 ```
 
+#### Docker support
+
+This project is ready for be executed in (Linux) Docker containers. The provided `Dockerfile` will create the machine and exposes it by port `80`.
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
