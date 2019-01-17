@@ -28,7 +28,9 @@ namespace Speller.Presentation.Web.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddScoped<ISpellingService, SpellingService>(service => new SpellingService());
+            services
+                .AddScoped<ISpellingService, SpellingService>(service => new SpellingService())
+                .AddLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
