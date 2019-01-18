@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speller.SpellingBox", "Speller.SpellingBox\Speller.SpellingBox.csproj", "{5721430A-B831-48AA-8AE1-88F05FC60206}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speller.SpellingBox", "Speller.SpellingBox\Speller.SpellingBox.csproj", "{5721430A-B831-48AA-8AE1-88F05FC60206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speller.Presentation.Console", "Speller.Presentation.Console\Speller.Presentation.Console.csproj", "{C7F0B2EC-8915-4B2E-BF18-C24A2F01A691}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speller.Presentation.Console", "Speller.Presentation.Console\Speller.Presentation.Console.csproj", "{C7F0B2EC-8915-4B2E-BF18-C24A2F01A691}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speller.Presentation.Web.Api", "Speller.Presentation.Web.Api\Speller.Presentation.Web.Api.csproj", "{A9536226-D7AE-45A1-844D-B37884E260D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speller.Presentation.Web.Api", "Speller.Presentation.Web.Api\Speller.Presentation.Web.Api.csproj", "{A9536226-D7AE-45A1-844D-B37884E260D8}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{799013CC-3397-4882-921E-40ADD63A5C39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5721430A-B831-48AA-8AE1-88F05FC60206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +57,23 @@ Global
 		{A9536226-D7AE-45A1-844D-B37884E260D8}.Release|x64.Build.0 = Release|Any CPU
 		{A9536226-D7AE-45A1-844D-B37884E260D8}.Release|x86.ActiveCfg = Release|Any CPU
 		{A9536226-D7AE-45A1-844D-B37884E260D8}.Release|x86.Build.0 = Release|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Debug|x64.Build.0 = Debug|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Debug|x86.Build.0 = Debug|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Release|x64.ActiveCfg = Release|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Release|x64.Build.0 = Release|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Release|x86.ActiveCfg = Release|Any CPU
+		{799013CC-3397-4882-921E-40ADD63A5C39}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D243617-3468-45F4-A477-9D80C2923A80}
 	EndGlobalSection
 EndGlobal

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Speller.SpellingBox.Models;
 using Speller.SpellingBox.Services;
 
 namespace Speller.Presentation.Web.Api
@@ -28,7 +29,13 @@ namespace Speller.Presentation.Web.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddScoped<ISpellingService, SpellingService>(service => new SpellingService());
+            services
+                .Configure<MachineLearningEndpoint>(Configuration.GetSection("MachineLearningEndpointSettings"));
+
+            services
+                .AddScoped<ISpellingService, SpellingService>()
+                .AddScoped<IMachineLearningService, MachineLearningService>()
+                .AddLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
