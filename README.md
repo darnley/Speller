@@ -64,7 +64,30 @@ The response for that request will be...
     "card"
 ]
 ```
+#### Azure Machine Learning support
 
+This application is prepared to be used side-by-side with a [Azure Machine Learning](https://docs.microsoft.com/pt-br/azure/machine-learning/) application. When the algorithm do not know the correction of a specific word, it will add the word in a list and, after the execution, it will send the unknown words to the Machine Learning. The return of Machine Learning Endpoint will replace the words in the original list.
+
+You can have many Machine Learning Endpoints in one application. To add them, use the `appsettings.json` file. In the `MachineLearningEndpointSettings` section, there are two sample objects that you must add [endpoint URL and API key](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-consume-web-service).
+
+To use your Azure Machine Learning Endpoint, you must set the `machineLearning` parameter in the request's URL. The value of this parameter must be the name of endpoint configured in `appsettings.json`.
+
+For example, we have an API called `GenreByName` configured.
+
+```javascript
+"MachineLearningEndpointSettings": {
+    "GenreByName": {
+        "Url":  "https://machinelearning.micro$oft.com/api/endpoint",
+        "ApiKey":  "1234567abcd=="
+    }
+}
+```
+
+So, if you would like to use the Machine Learning like I said, you should call the API in the following manner.
+
+`/api/speller?machineLearning=genrebyname`
+
+If you do not want to use Machine Learning, do not put the `machineLearning` parameter in URL.
 
 #### Docker support
 
