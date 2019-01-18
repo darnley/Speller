@@ -16,6 +16,7 @@ namespace Speller.SpellingBox.Services
         void AddDictionary(IEnumerable<string> dictionary);
         string SuggestCorrection(string word);
         Task<List<string>> SuggestCorrection(List<string> words);
+        Task<List<string>> SuggestCorrectionWithMachineLearning(IEnumerable<string> dictionary, List<string> words, string machineLearningName = null);
     }
 
     /// <summary>
@@ -129,6 +130,30 @@ namespace Speller.SpellingBox.Services
                 });
 
                 return words;
+            });
+        }
+
+        public Task<List<string>> SuggestCorrectionWithMachineLearning(IEnumerable<string> dictionary, List<string> words, string machineLearningName = null)
+        {
+            return Task.Run(() =>
+            {
+                // Add the words to the dictionary
+                this.AddDictionary(dictionary);
+
+                // Process the words
+                var suggestions = this.SuggestCorrection(words);
+
+                suggestions.Wait();
+
+                if (!string.IsNullOrEmpty(machineLearningName) && this._machineLearningService.HasIndexes())
+                {
+                    // Send the words to the Machine Learning endpoint
+                    var machineLearningSuggestions = this._machineLearningService.CorrectWordsByIndexAsync(suggestions.Result);
+
+                    machineLearningSuggestions.Wait();
+                }
+
+                return suggestions.Result;
             });
         }
 

@@ -89,7 +89,15 @@ namespace Speller.SpellingBox.Services
                     MachineLearningResponse machineLearningResponse = JsonConvert.DeserializeObject<MachineLearningResponse>(responseRead);
 
                     // The source list will be changed by reference
-                    this.PutCorrectionsIntoSourceList(source, machineLearningResponse.Results.Output);
+                    try
+                    {
+                        this.PutCorrectionsIntoSourceList(source, machineLearningResponse.Results.Output);
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        throw new InvalidCastException("Machine Learning return format is invalid");
+                    }
+                    
                 } else
                 {
                     throw new HttpRequestException("Machine Learning Endpoint is unavailable. Status Code: " + response.StatusCode.ToString());

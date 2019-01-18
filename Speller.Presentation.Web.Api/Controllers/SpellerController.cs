@@ -44,12 +44,6 @@ namespace Speller.Presentation.Web.Api.Controllers
                 return new BadRequestObjectResult(ModelState);
             }
 
-            // Add the words from request to the dictionary
-            spellingService.AddDictionary(request.Dictionary);
-
-            // Get the corrections from algorithm
-            var result = spellingService.SuggestCorrection(request.Words.ToList());
-
             if (machineLearning != null)
             {
                 #region Machine Learning Service configuration
@@ -61,24 +55,16 @@ namespace Speller.Presentation.Web.Api.Controllers
                         new Uri(machineLearningConfigurationSection.GetSection(machineLearning).GetValue<string>("Url")),
                         machineLearningConfigurationSection.GetSection(machineLearning).GetValue<string>("apiKey"));
                 }
-                catch (ArgumentNullException)
-                {
-                    _logger.LogError($"Machine Learning configuration with name '{machineLearning}' not found");
-                }
-                #endregion
-
-                result.Wait();
-
-                try
-                {
-                    if (this._machineLearningService.HasIndexes())
-                        this._machineLearningService.CorrectWordsByIndexAsync(result.Result).Wait();
-                }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex.Message);
+                    _logger.LogError($"Machine Learning configuration with name '{machineLearning}' not found");
+
+                    return BadRequest(new ArgumentOutOfRangeException("machineLearning"));
                 }
+                #endregion
             }
+
+            var result = spellingService.SuggestCorrectionWithMachineLearning(request.Dictionary, request.Words.ToList(), machineLearning);
 
             result.Wait();
 
