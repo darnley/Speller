@@ -1,6 +1,6 @@
 # Speller
 
-Speller is a .NET Core application that implements symmetric spelling algorithm.
+Speller is a .NET Core application that implements [symmetric spelling algorithm](https://github.com/wolfgarbe/SymSpell).
 
 ## Installation
 
