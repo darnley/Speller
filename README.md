@@ -64,6 +64,7 @@ The response for that request will be...
     "card"
 ]
 ```
+
 #### Azure Machine Learning support
 
 This application is prepared to be used side-by-side with a [Azure Machine Learning](https://docs.microsoft.com/pt-br/azure/machine-learning/) application. When the algorithm do not know the correction of a specific word, it will add the word in a list and, after the execution, it will send the unknown words to the Machine Learning. The return of Machine Learning Endpoint will replace the words in the original list.
