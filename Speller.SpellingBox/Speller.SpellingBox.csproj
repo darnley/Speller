@@ -3,13 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>2.2.0</Version>
-    <Authors>Darnley Costa &lt;darnleycosta@gmail.com</Authors>
+    <Authors>Darnley Costa</Authors>
     <Product>Speller</Product>
     <Description>The symmetric spelling correction algorithm in .NET Core.</Description>
     <PackageLicenseUrl>https://darnley.mit-license.org/2019</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Darnley/Speller</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Darnley/Speller</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Holbor.Speller</PackageId>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
