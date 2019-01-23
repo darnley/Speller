@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Speller.SpellingBox.Services;
+using Holbor.Speller;
 using Speller.Presentation.Web.Api.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;

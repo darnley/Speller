@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Speller.SpellingBox.Models
+namespace Holbor.Speller.Models
 {
     public class MachineLearningEndpoint
     {

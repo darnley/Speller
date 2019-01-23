@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Speller.SpellingBox.Services;
+using Holbor.Speller;
 
 namespace Speller.Presentation.Console
 {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Speller.SpellingBox.Services
+namespace Holbor.Speller
 {
     /// <summary>
     /// Implement the SpellingService interface.

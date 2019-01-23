@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.2.0</Version>
+    <Version>3.0.0</Version>
     <Authors>Darnley Costa</Authors>
     <Product>Speller</Product>
     <Description>The symmetric spelling correction algorithm in .NET Core.</Description>
